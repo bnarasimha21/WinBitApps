@@ -1,54 +1,37 @@
-# WinBitApps Portfolio
+# WinBitApps
 
-Website for WinBitApps — a small indie studio building simple, privacy-focused apps.
+Website for [WinBitApps](https://winbitapps.com) — a small indie studio building simple, privacy-focused apps. No subscriptions, no data harvesting — just honest software.
 
-## Live Site
+## Apps
 
-**URL:** [winbitapps.com](https://winbitapps.com)
-
-## Apps Featured
-
-- **FlipIt** - Memory matching game (Android/iOS)
-- **DailyBrick** - Offline-first habit tracker (iOS) — Coming Soon
-- **TripXplorer** - AI-powered trip planner — Coming Soon
+| App | Description | Platform | Status |
+|-----|-------------|----------|--------|
+| **FlipIt** | Memory card matching game | Android / iOS | Available |
+| **DailyBrick** | Offline-first habit tracker | iOS | Coming Soon |
+| **TripXplorer** | AI-powered trip planner | Web | Coming Soon |
 
 ## Tech Stack
 
-- Pure HTML/CSS (no framework, no build step)
-- Google Fonts (DM Sans, DM Serif Display)
+- HTML & CSS (no build step)
+- [Tailwind CSS](https://tailwindcss.com) via CDN (privacy page)
+- Google Fonts — DM Sans, DM Serif Display
 
-## Deployment
-
-### Option 1: GitHub Pages
-
-1. Push to GitHub
-2. Settings → Pages → Deploy from main branch
-3. Site will be at `username.github.io/WinBitApps`
-
-### Option 2: Vercel
-
-```bash
-npx vercel --prod
-```
-
-### Option 3: Netlify
-
-Drag and drop the folder to [netlify.com/drop](https://app.netlify.com/drop)
-
-### Option 4: Firebase Hosting
-
-```bash
-firebase init hosting
-firebase deploy
-```
-
-## Files
+## Project Structure
 
 ```
 WinBitApps/
 ├── index.html      # Main portfolio page
 ├── privacy.html    # Privacy policy
-└── README.md       # This file
+├── vercel.json     # Vercel deployment config
+└── README.md
+```
+
+## Deployment
+
+Hosted on [Vercel](https://vercel.com). The site is static HTML so no build step is needed — `vercel.json` is configured to skip the build.
+
+```bash
+npx vercel --prod
 ```
 
 ## License
