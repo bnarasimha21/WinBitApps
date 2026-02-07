@@ -15,6 +15,7 @@
             --brick: #e05a4a;
             --brick-light: #e74c3c;
             --warm-bg: #121212;
+            --card-bg: #1a1a1a;
             --text: #e8e4df;
             --text-muted: #8a8a8a;
             --divider: #2a2a2a;
@@ -33,15 +34,19 @@
         a { color: inherit; text-decoration: none; }
 
         .container {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .container--narrow {
             max-width: 640px;
             margin: 0 auto;
             padding: 0 24px;
         }
 
         /* --- Nav --- */
-        nav {
-            padding: 20px 0;
-        }
+        nav { padding: 20px 0; }
         nav .container {
             display: flex;
             justify-content: space-between;
@@ -61,19 +66,9 @@
         }
         .nav-links a:hover { color: var(--text); }
 
-        /* --- Divider --- */
-        .divider {
-            text-align: center;
-            color: var(--divider);
-            font-size: 1.5rem;
-            letter-spacing: 12px;
-            padding: 16px 0;
-            user-select: none;
-        }
-
         /* --- Hero --- */
         .hero {
-            padding: 28px 0 0;
+            padding: 48px 0 20px;
             text-align: center;
         }
         .hero h1 {
@@ -91,86 +86,178 @@
             font-size: 1.15rem;
             color: var(--text-muted);
             max-width: 480px;
-            margin: 0 auto;
+            margin: 0 auto 24px;
+        }
+        .scroll-hint {
+            display: inline-block;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            animation: bounce 2s infinite;
+        }
+        .scroll-hint span {
+            display: block;
+            font-size: 1.2rem;
+            margin-top: 4px;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(6px); }
         }
 
-        /* --- Apps --- */
-        .apps-section { padding: 0 0 24px; }
+        /* --- Apps Grid Section --- */
+        .apps-section {
+            padding: 56px 0;
+        }
         .apps-section h2 {
             font-family: 'DM Serif Display', serif;
             font-size: 1.75rem;
-            margin-bottom: 16px;
             text-align: center;
+            margin-bottom: 40px;
         }
 
-        .app-item {
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 28px;
+        }
+
+        /* --- App Card --- */
+        .app-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            border: 1px solid var(--divider);
+            padding: 28px 24px;
             display: flex;
-            gap: 20px;
-            align-items: flex-start;
-            padding: 14px 0;
-            border-bottom: 1px solid var(--divider);
+            flex-direction: column;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
-        .app-item:first-child { border-top: 1px solid var(--divider); }
+        .app-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+        }
 
+        .app-card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 6px;
+        }
         .app-icon {
-            width: 56px;
-            height: 56px;
-            border-radius: 14px;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 26px;
+            font-size: 22px;
             flex-shrink: 0;
         }
+        .app-card-header h3 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.4rem;
+        }
 
-        .app-info { flex: 1; }
-        .app-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: 6px;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-        .app-name {
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
-        .app-price {
+        .app-meta {
             font-size: 0.85rem;
             color: var(--text-muted);
+            margin-bottom: 12px;
         }
-        .app-tagline {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            margin-bottom: 10px;
-        }
-        .app-link {
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: var(--brick);
-            transition: opacity 0.2s;
-        }
-        .app-link:hover { opacity: 0.7; }
 
         .badge {
             display: inline-block;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            padding: 3px 8px;
+            padding: 2px 7px;
             border-radius: 4px;
             background: #332618;
             color: #f0a050;
-            margin-left: 8px;
             vertical-align: middle;
+            margin-left: 8px;
+        }
+
+        .app-desc {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 20px;
+            flex: 1;
+        }
+
+        /* Screenshots inside card */
+        .app-screenshots {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .app-screenshots img {
+            width: calc(50% - 5px);
+            border-radius: 14px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.35);
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+
+        /* No-screenshot placeholder */
+        .app-no-screenshot {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #1e1e1e;
+            border-radius: 14px;
+            border: 1px dashed var(--divider);
+            padding: 32px 16px;
+            margin-bottom: 20px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            text-align: center;
+        }
+
+        /* CTA buttons */
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 22px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #fff;
+            background: var(--brick);
+            transition: background 0.2s, transform 0.2s;
+            align-self: flex-start;
+        }
+        .cta-btn:hover {
+            background: var(--brick-light);
+            transform: translateY(-1px);
+        }
+        .cta-btn svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+
+        .cta-coming-soon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 22px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #f0a050;
+            background: #332618;
+            cursor: default;
+            align-self: flex-start;
         }
 
         /* --- Values --- */
         .values {
             text-align: center;
-            padding: 0;
+            padding: 48px 0;
         }
         .values p {
             font-family: 'DM Serif Display', serif;
@@ -182,7 +269,7 @@
         }
 
         /* --- About --- */
-        .about { padding: 0; }
+        .about { padding: 48px 0; background: #161616; }
         .about h2 {
             font-family: 'DM Serif Display', serif;
             font-size: 1.75rem;
@@ -200,7 +287,7 @@
         /* --- Contact --- */
         .contact {
             text-align: center;
-            padding: 0;
+            padding: 48px 0;
         }
         .contact h2 {
             font-family: 'DM Serif Display', serif;
@@ -224,10 +311,11 @@
 
         /* --- Footer --- */
         footer {
-            padding: 20px 0 20px;
+            padding: 20px 0;
             text-align: center;
             font-size: 0.85rem;
             color: var(--text-muted);
+            border-top: 1px solid var(--divider);
         }
         footer a {
             color: var(--text-muted);
@@ -242,9 +330,14 @@
         }
 
         /* --- Responsive --- */
-        @media (max-width: 480px) {
+        @media (max-width: 580px) {
+            .apps-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
             .nav-links { gap: 16px; }
-            .app-header { flex-direction: column; gap: 2px; }
+            .hero { padding: 32px 0 16px; }
+            .apps-section { padding: 40px 0; }
         }
     </style>
 </head>
@@ -265,73 +358,87 @@
         <div class="container">
             <h1>Apps built <em>bit by bit</em></h1>
             <p>Simple, privacy-focused software. Pay once, own forever. No subscriptions, no data harvesting.</p>
+            <div class="scroll-hint">
+                See what we make
+                <span>&darr;</span>
+            </div>
         </div>
     </section>
-
-    <div class="divider">* * *</div>
 
     <section id="apps" class="apps-section">
         <div class="container">
             <h2>What we make</h2>
 
-            <div class="app-item">
-                <div class="app-icon" style="background: #2d2040;">🎴</div>
-                <div class="app-info">
-                    <div class="app-header">
-                        <span class="app-name">FlipIt</span>
-                        <span class="app-price">$3.99 &middot; one-time</span>
-                    </div>
-                    <p class="app-tagline">A memory card matching game with 5 themes, 3 difficulty levels, and global leaderboards. Free to play, unlock all themes with FlipIt Pro.</p>
-                    <a href="https://play.google.com/store/apps/details?id=com.flipit.memorygame" target="_blank" class="app-link">Play Store &rarr;</a>
-                </div>
-            </div>
+            <div class="apps-grid">
 
-            <div class="app-item">
-                <div class="app-icon" style="background: #1a2e1a;">&#x2713;</div>
-                <div class="app-info">
-                    <div class="app-header">
-                        <span class="app-name">DailyBrick <span class="badge">Coming Soon</span></span>
-                        <span class="app-price">$9.99 &middot; lifetime</span>
+                <!-- FlipIt -->
+                <div class="app-card">
+                    <div class="app-card-header">
+                        <div class="app-icon" style="background: #2d2040;">&#x1F3B4;</div>
+                        <h3>FlipIt</h3>
                     </div>
-                    <p class="app-tagline">An offline-first habit tracker. Track daily and weekly habits, build streaks, see your progress. Your data never leaves your device.</p>
-                </div>
-            </div>
-
-            <div class="app-item">
-                <div class="app-icon" style="background: #1a2433;">&#x2708;&#xFE0F;</div>
-                <div class="app-info">
-                    <div class="app-header">
-                        <span class="app-name">TripXplorer <span class="badge">Coming Soon</span></span>
-                        <span class="app-price">Free &middot; open source</span>
+                    <div class="app-meta">$3.99 &middot; one-time purchase</div>
+                    <div class="app-screenshots">
+                        <img src="images/flipit/home.png" alt="FlipIt home screen" loading="lazy">
+                        <img src="images/flipit/gameplay.png" alt="FlipIt gameplay" loading="lazy">
                     </div>
-                    <p class="app-tagline">AI-powered travel planner with interactive maps and a chatbot assistant. Generate personalized itineraries, visualize them on Mapbox, and refine plans through conversation.</p>
+                    <p class="app-desc">A memory card matching game with 5 themes, 3 difficulty levels, and global leaderboards. Free to play, unlock all themes with FlipIt Pro.</p>
+                    <a href="https://play.google.com/store/apps/details?id=com.flipit.memorygame" target="_blank" class="cta-btn">
+                        <svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a2.37 2.37 0 0 1-.859-1.82V3.634c0-.702.312-1.356.858-1.82zM14.852 13.06l2.79 2.79-8.925 5.076 6.135-7.866zm3.96-3.838l2.15 1.223a1.18 1.18 0 0 1 0 2.11l-2.15 1.223-2.49-2.278 2.49-2.278zM8.717 3.074l8.925 5.076-2.79 2.79-6.135-7.866z"/></svg>
+                        Play Store
+                    </a>
                 </div>
-            </div>
 
+                <!-- DailyBrick -->
+                <div class="app-card">
+                    <div class="app-card-header">
+                        <div class="app-icon" style="background: #1a2e1a;">&#x2713;</div>
+                        <h3>DailyBrick <span class="badge">Coming Soon</span></h3>
+                    </div>
+                    <div class="app-meta">$9.99 &middot; lifetime</div>
+                    <div class="app-screenshots">
+                        <img src="images/dailybrick/habits.png" alt="DailyBrick habits" loading="lazy">
+                        <img src="images/dailybrick/stats.png" alt="DailyBrick stats" loading="lazy">
+                    </div>
+                    <p class="app-desc">An offline-first habit tracker. Track daily and weekly habits, build streaks, see your progress. Your data never leaves your device.</p>
+                    <span class="cta-coming-soon">Coming Soon</span>
+                </div>
+
+                <!-- TripXplorer
+                <div class="app-card">
+                    <div class="app-card-header">
+                        <div class="app-icon" style="background: #1a2433;">&#x2708;&#xFE0F;</div>
+                        <h3>TripXplorer <span class="badge">Coming Soon</span></h3>
+                    </div>
+                    <div class="app-meta">Free &middot; open source</div>
+                    <div class="app-no-screenshot">Screenshots coming soon</div>
+                    <p class="app-desc">AI-powered travel planner with interactive maps and a chatbot assistant. Generate personalized itineraries, visualize them on Mapbox, and refine plans through conversation.</p>
+                    <span class="cta-coming-soon">Coming Soon</span>
+                </div>
+                -->
+
+            </div>
         </div>
     </section>
 
-    <div class="divider">* * *</div>
-
+    <!-- Values -->
     <section class="values">
-        <div class="container">
+        <div class="container--narrow">
             <p>We think great software should be simple, honest, and yours to keep. No recurring fees for basic features. No tracking. No bloat.</p>
         </div>
     </section>
 
-    <div class="divider">* * *</div>
-
+    <!-- About -->
     <section id="about" class="about">
-        <div class="container">
+        <div class="container--narrow">
             <h2>About</h2>
             <p>WinBitApps is a small indie studio based in Bangalore, India. We build apps that solve real problems without exploiting users. One app at a time, bit by bit.</p>
         </div>
     </section>
 
-    <div class="divider">* * *</div>
-
+    <!-- Contact -->
     <section id="contact" class="contact">
-        <div class="container">
+        <div class="container--narrow">
             <h2>Say hello</h2>
             <p>Feedback, questions, or just want to chat?</p>
             <a href="mailto:hello@winbitapps.com" class="email-link">hello@winbitapps.com</a>
@@ -339,7 +446,7 @@
     </section>
 
     <footer>
-        <div class="container">
+        <div class="container--narrow">
             <div class="footer-links">
                 <a href="/privacy.html">Privacy</a>
                 <a href="/terms">Terms</a>
