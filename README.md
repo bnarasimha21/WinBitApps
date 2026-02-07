@@ -1,10 +1,10 @@
-# BrickApps Portfolio
+# WinBitApps Portfolio
 
-Website for BrickApps — a small indie studio building simple, privacy-focused apps.
+Website for WinBitApps — a small indie studio building simple, privacy-focused apps.
 
 ## Live Site
 
-**URL:** [brickapps.com](https://brickapps.com)
+**URL:** [winbitapps.com](https://winbitapps.com)
 
 ## Apps Featured
 
@@ -23,7 +23,7 @@ Website for BrickApps — a small indie studio building simple, privacy-focused 
 
 1. Push to GitHub
 2. Settings → Pages → Deploy from main branch
-3. Site will be at `username.github.io/BrickApps`
+3. Site will be at `username.github.io/WinBitApps`
 
 ### Option 2: Vercel
 
@@ -45,7 +45,7 @@ firebase deploy
 ## Files
 
 ```
-BrickApps/
+WinBitApps/
 ├── index.html      # Main portfolio page
 ├── privacy.html    # Privacy policy
 └── README.md       # This file
