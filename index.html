@@ -3,352 +3,350 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Narsi - App Developer</title>
-    <meta name="description" content="Indie app developer creating simple, user-friendly mobile apps. No subscriptions, just great software.">
+    <title>BrickApps</title>
+    <meta name="description" content="BrickApps builds simple, privacy-focused mobile apps. No subscriptions, no bloat — just great software.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                },
-            },
-        }
-    </script>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=DM+Serif+Display&display=swap" rel="stylesheet">
     <style>
-        .gradient-text {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --brick: #e05a4a;
+            --brick-light: #e74c3c;
+            --warm-bg: #121212;
+            --text: #e8e4df;
+            --text-muted: #8a8a8a;
+            --divider: #2a2a2a;
         }
-        .card-hover {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            color: var(--text);
+            background: var(--warm-bg);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
         }
-        .card-hover:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+
+        a { color: inherit; text-decoration: none; }
+
+        .container {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 0 24px;
         }
+
+        /* --- Nav --- */
+        nav {
+            padding: 20px 0;
+        }
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.5rem;
+            color: var(--brick);
+            letter-spacing: -0.5px;
+        }
+        .nav-links { display: flex; gap: 28px; }
+        .nav-links a {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--text); }
+
+        /* --- Divider --- */
+        .divider {
+            text-align: center;
+            color: var(--divider);
+            font-size: 1.5rem;
+            letter-spacing: 12px;
+            padding: 16px 0;
+            user-select: none;
+        }
+
+        /* --- Hero --- */
+        .hero {
+            padding: 28px 0 0;
+            text-align: center;
+        }
+        .hero h1 {
+            font-family: 'DM Serif Display', serif;
+            font-size: clamp(2.5rem, 6vw, 3.5rem);
+            line-height: 1.15;
+            letter-spacing: -1px;
+            margin-bottom: 20px;
+        }
+        .hero h1 em {
+            font-style: italic;
+            color: var(--brick);
+        }
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        /* --- Apps --- */
+        .apps-section { padding: 0 0 24px; }
+        .apps-section h2 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.75rem;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .app-item {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--divider);
+        }
+        .app-item:first-child { border-top: 1px solid var(--divider); }
+
         .app-icon {
-            width: 80px;
-            height: 80px;
-            border-radius: 20px;
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 40px;
+            font-size: 26px;
+            flex-shrink: 0;
         }
-        html {
-            scroll-behavior: smooth;
+
+        .app-info { flex: 1; }
+        .app-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 6px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .app-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        .app-price {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        .app-tagline {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+        }
+        .app-link {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--brick);
+            transition: opacity 0.2s;
+        }
+        .app-link:hover { opacity: 0.7; }
+
+        .badge {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 3px 8px;
+            border-radius: 4px;
+            background: #332618;
+            color: #f0a050;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+
+        /* --- Values --- */
+        .values {
+            text-align: center;
+            padding: 0;
+        }
+        .values p {
+            font-family: 'DM Serif Display', serif;
+            font-size: clamp(1.25rem, 3vw, 1.6rem);
+            line-height: 1.6;
+            color: var(--text);
+            max-width: 520px;
+            margin: 0 auto;
+        }
+
+        /* --- About --- */
+        .about { padding: 0; }
+        .about h2 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.75rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .about p {
+            color: var(--text-muted);
+            text-align: center;
+            font-size: 1.05rem;
+            max-width: 520px;
+            margin: 0 auto;
+        }
+
+        /* --- Contact --- */
+        .contact {
+            text-align: center;
+            padding: 0;
+        }
+        .contact h2 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.75rem;
+            margin-bottom: 12px;
+        }
+        .contact p {
+            color: var(--text-muted);
+            margin-bottom: 24px;
+        }
+        .email-link {
+            display: inline-block;
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: var(--brick);
+            border-bottom: 2px solid var(--brick);
+            padding-bottom: 2px;
+            transition: opacity 0.2s;
+        }
+        .email-link:hover { opacity: 0.7; }
+
+        /* --- Footer --- */
+        footer {
+            padding: 20px 0 20px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        footer a {
+            color: var(--text-muted);
+            transition: color 0.2s;
+        }
+        footer a:hover { color: var(--text); }
+        .footer-links {
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 480px) {
+            .nav-links { gap: 16px; }
+            .app-header { flex-direction: column; gap: 2px; }
         }
     </style>
 </head>
-<body class="bg-gray-50 font-sans antialiased">
-    <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-md z-50 border-b border-gray-100">
-        <div class="max-w-6xl mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <a href="#" class="text-xl font-bold gradient-text">Narsi</a>
-                <div class="flex items-center gap-6">
-                    <a href="#apps" class="text-gray-600 hover:text-gray-900 transition">Apps</a>
-                    <a href="#about" class="text-gray-600 hover:text-gray-900 transition">About</a>
-                    <a href="#contact" class="text-gray-600 hover:text-gray-900 transition">Contact</a>
-                </div>
+<body>
+
+    <nav>
+        <div class="container">
+            <a href="#" class="logo">BrickApps</a>
+            <div class="nav-links">
+                <a href="#apps">Apps</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="pt-32 pb-20 px-6">
-        <div class="max-w-6xl mx-auto text-center">
-            <h1 class="text-5xl md:text-6xl font-extrabold text-gray-900 mb-6">
-                Building apps that <span class="gradient-text">respect users</span>
-            </h1>
-            <p class="text-xl text-gray-600 max-w-2xl mx-auto mb-10">
-                Indie developer crafting simple, privacy-focused mobile apps. 
-                No subscriptions, no bloat, no data harvesting. Just great software.
-            </p>
-            <div class="flex flex-wrap justify-center gap-4">
-                <a href="#apps" class="px-8 py-4 bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-semibold rounded-full hover:opacity-90 transition shadow-lg shadow-indigo-200">
-                    View My Apps
-                </a>
-                <a href="#contact" class="px-8 py-4 bg-white text-gray-800 font-semibold rounded-full border border-gray-200 hover:border-gray-300 transition">
-                    Get in Touch
-                </a>
-            </div>
+    <section class="hero">
+        <div class="container">
+            <h1>Apps built <em>brick by brick</em></h1>
+            <p>Simple, privacy-focused software. Pay once, own forever. No subscriptions, no data harvesting.</p>
         </div>
     </section>
 
-    <!-- Stats Section -->
-    <section class="py-12 bg-white border-y border-gray-100">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-                <div>
-                    <div class="text-4xl font-bold gradient-text">4+</div>
-                    <div class="text-gray-600 mt-1">Apps Built</div>
-                </div>
-                <div>
-                    <div class="text-4xl font-bold gradient-text">10K+</div>
-                    <div class="text-gray-600 mt-1">Downloads</div>
-                </div>
-                <div>
-                    <div class="text-4xl font-bold gradient-text">$0</div>
-                    <div class="text-gray-600 mt-1">Monthly Subscriptions</div>
-                </div>
-                <div>
-                    <div class="text-4xl font-bold gradient-text">100%</div>
-                    <div class="text-gray-600 mt-1">Privacy Focused</div>
+    <div class="divider">* * *</div>
+
+    <section id="apps" class="apps-section">
+        <div class="container">
+            <h2>What we make</h2>
+
+            <div class="app-item">
+                <div class="app-icon" style="background: #2d2040;">🎴</div>
+                <div class="app-info">
+                    <div class="app-header">
+                        <span class="app-name">FlipIt</span>
+                        <span class="app-price">$3.99 &middot; one-time</span>
+                    </div>
+                    <p class="app-tagline">A memory card matching game with 5 themes, 3 difficulty levels, and global leaderboards. Free to play, unlock all themes with FlipIt Pro.</p>
+                    <a href="https://play.google.com/store/apps/details?id=com.flipit.memorygame" target="_blank" class="app-link">Play Store &rarr;</a>
                 </div>
             </div>
+
+            <div class="app-item">
+                <div class="app-icon" style="background: #1a2e1a;">&#x2713;</div>
+                <div class="app-info">
+                    <div class="app-header">
+                        <span class="app-name">DailyBrick <span class="badge">Coming Soon</span></span>
+                        <span class="app-price">$9.99 &middot; lifetime</span>
+                    </div>
+                    <p class="app-tagline">An offline-first habit tracker. Track daily and weekly habits, build streaks, see your progress. Your data never leaves your device.</p>
+                </div>
+            </div>
+
+            <div class="app-item">
+                <div class="app-icon" style="background: #1a2433;">&#x2708;&#xFE0F;</div>
+                <div class="app-info">
+                    <div class="app-header">
+                        <span class="app-name">TripXplorer <span class="badge">Coming Soon</span></span>
+                        <span class="app-price">Free &middot; open source</span>
+                    </div>
+                    <p class="app-tagline">AI-powered travel planner with interactive maps and a chatbot assistant. Generate personalized itineraries, visualize them on Mapbox, and refine plans through conversation.</p>
+                </div>
+            </div>
+
         </div>
     </section>
 
-    <!-- Apps Section -->
-    <section id="apps" class="py-20 px-6">
-        <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-gray-900 mb-4">My Apps</h2>
-                <p class="text-gray-600 text-lg">Simple tools that solve real problems</p>
-            </div>
+    <div class="divider">* * *</div>
 
-            <div class="grid md:grid-cols-2 gap-8">
-                <!-- FlipIt -->
-                <div class="bg-white rounded-3xl p-8 card-hover border border-gray-100">
-                    <div class="flex items-start gap-5 mb-6">
-                        <div class="app-icon bg-gradient-to-br from-purple-500 to-indigo-600 text-white shadow-lg shadow-purple-200">
-                            🎴
-                        </div>
-                        <div>
-                            <h3 class="text-2xl font-bold text-gray-900">FlipIt</h3>
-                            <p class="text-gray-500">Memory Match Game</p>
-                        </div>
-                    </div>
-                    <p class="text-gray-600 mb-6">
-                        Train your brain with this engaging card matching game. Multiple themes, 
-                        difficulty levels, and global leaderboards. Fun for all ages!
-                    </p>
-                    <div class="flex flex-wrap gap-2 mb-6">
-                        <span class="px-3 py-1 bg-purple-50 text-purple-700 rounded-full text-sm font-medium">Android</span>
-                        <span class="px-3 py-1 bg-purple-50 text-purple-700 rounded-full text-sm font-medium">iOS</span>
-                        <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium">Family Friendly</span>
-                    </div>
-                    <div class="flex items-center justify-between">
-                        <div class="text-sm text-gray-500">
-                            <span class="font-semibold text-gray-900">$2.99</span> one-time
-                        </div>
-                        <a href="https://play.google.com/store/apps/details?id=com.flipit.memorygame" target="_blank" class="text-indigo-600 font-semibold hover:text-indigo-700 transition">
-                            View on Play Store →
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Streakly (Habit Tracker) -->
-                <div class="bg-white rounded-3xl p-8 card-hover border border-gray-100">
-                    <div class="flex items-start gap-5 mb-6">
-                        <div class="app-icon bg-gradient-to-br from-green-500 to-emerald-600 text-white shadow-lg shadow-green-200">
-                            ✓
-                        </div>
-                        <div>
-                            <h3 class="text-2xl font-bold text-gray-900">Streakly</h3>
-                            <p class="text-gray-500">Habit Tracker</p>
-                        </div>
-                    </div>
-                    <p class="text-gray-600 mb-6">
-                        A simple, offline-first habit tracker with no subscriptions. Track daily & weekly habits, 
-                        build streaks, and see your progress. Your data stays on your device.
-                    </p>
-                    <div class="flex flex-wrap gap-2 mb-6">
-                        <span class="px-3 py-1 bg-green-50 text-green-700 rounded-full text-sm font-medium">iOS</span>
-                        <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium">Offline First</span>
-                        <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium">No Account</span>
-                    </div>
-                    <div class="flex items-center justify-between">
-                        <div class="text-sm text-gray-500">
-                            <span class="font-semibold text-gray-900">$9.99</span> lifetime
-                        </div>
-                        <span class="text-amber-600 font-semibold">
-                            Coming Soon
-                        </span>
-                    </div>
-                </div>
-
-                <!-- TripXplorer -->
-                <div class="bg-white rounded-3xl p-8 card-hover border border-gray-100">
-                    <div class="flex items-start gap-5 mb-6">
-                        <div class="app-icon bg-gradient-to-br from-blue-500 to-cyan-600 text-white shadow-lg shadow-blue-200">
-                            ✈️
-                        </div>
-                        <div>
-                            <h3 class="text-2xl font-bold text-gray-900">TripXplorer</h3>
-                            <p class="text-gray-500">AI Trip Planner</p>
-                        </div>
-                    </div>
-                    <p class="text-gray-600 mb-6">
-                        Plan your perfect trip with AI. Get personalized itineraries, weather forecasts, 
-                        route optimization, and packing checklists. Share trips with friends.
-                    </p>
-                    <div class="flex flex-wrap gap-2 mb-6">
-                        <span class="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-sm font-medium">iOS</span>
-                        <span class="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-sm font-medium">Android</span>
-                        <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium">AI Powered</span>
-                    </div>
-                    <div class="flex items-center justify-between">
-                        <div class="text-sm text-gray-500">
-                            Free + <span class="font-semibold text-gray-900">Premium</span>
-                        </div>
-                        <span class="text-amber-600 font-semibold">
-                            Coming Soon
-                        </span>
-                    </div>
-                </div>
-
-                <!-- Silly Debates -->
-                <div class="bg-white rounded-3xl p-8 card-hover border border-gray-100">
-                    <div class="flex items-start gap-5 mb-6">
-                        <div class="app-icon bg-gradient-to-br from-orange-500 to-red-500 text-white shadow-lg shadow-orange-200">
-                            🎭
-                        </div>
-                        <div>
-                            <h3 class="text-2xl font-bold text-gray-900">Silly Debates</h3>
-                            <p class="text-gray-500">Daily Debate Game</p>
-                        </div>
-                    </div>
-                    <p class="text-gray-600 mb-6">
-                        A fun daily debate game where users submit creative entries, vote on favorites, 
-                        and compete on leaderboards. AI-powered topics and moderation.
-                    </p>
-                    <div class="flex flex-wrap gap-2 mb-6">
-                        <span class="px-3 py-1 bg-orange-50 text-orange-700 rounded-full text-sm font-medium">Web</span>
-                        <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium">Next.js</span>
-                        <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium">AI Powered</span>
-                    </div>
-                    <div class="flex items-center justify-between">
-                        <div class="text-sm text-gray-500">
-                            <span class="font-semibold text-gray-900">Free</span> to play
-                        </div>
-                        <a href="https://silly-debates.com" target="_blank" class="text-indigo-600 font-semibold hover:text-indigo-700 transition">
-                            Play Now →
-                        </a>
-                    </div>
-                </div>
-            </div>
+    <section class="values">
+        <div class="container">
+            <p>We think great software should be simple, honest, and yours to keep. No recurring fees for basic features. No tracking. No bloat.</p>
         </div>
     </section>
 
-    <!-- Philosophy Section -->
-    <section class="py-20 px-6 bg-gradient-to-br from-indigo-500 to-purple-600 text-white">
-        <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-4xl font-bold mb-6">My Philosophy</h2>
-            <p class="text-xl opacity-90 mb-12">
-                I believe great software doesn't need to be complicated or expensive.
-            </p>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-white/10 rounded-2xl p-6 backdrop-blur-sm">
-                    <div class="text-4xl mb-4">💰</div>
-                    <h3 class="text-xl font-semibold mb-2">No Subscriptions</h3>
-                    <p class="opacity-80">Pay once, own forever. No recurring charges for basic features.</p>
-                </div>
-                <div class="bg-white/10 rounded-2xl p-6 backdrop-blur-sm">
-                    <div class="text-4xl mb-4">🔒</div>
-                    <h3 class="text-xl font-semibold mb-2">Privacy First</h3>
-                    <p class="opacity-80">Your data stays on your device. No accounts, no tracking.</p>
-                </div>
-                <div class="bg-white/10 rounded-2xl p-6 backdrop-blur-sm">
-                    <div class="text-4xl mb-4">✨</div>
-                    <h3 class="text-xl font-semibold mb-2">Simple & Fast</h3>
-                    <p class="opacity-80">No bloat, no unnecessary features. Just what you need.</p>
-                </div>
-            </div>
+    <div class="divider">* * *</div>
+
+    <section id="about" class="about">
+        <div class="container">
+            <h2>About</h2>
+            <p>BrickApps is a small indie studio based in Bangalore, India. We build apps that solve real problems without exploiting users. One app at a time, brick by brick.</p>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="py-20 px-6 bg-white">
-        <div class="max-w-4xl mx-auto">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl font-bold text-gray-900 mb-4">About Me</h2>
-            </div>
-            <div class="prose prose-lg max-w-none text-gray-600">
-                <p class="text-center text-xl leading-relaxed">
-                    I'm an indie developer based in Bangalore, India, passionate about building 
-                    apps that solve real problems without exploiting users. I'm frustrated by the 
-                    industry trend of subscription-heavy, data-hungry apps — so I build alternatives.
-                </p>
-                <div class="mt-12 grid md:grid-cols-2 gap-8">
-                    <div class="bg-gray-50 rounded-2xl p-6">
-                        <h3 class="text-xl font-bold text-gray-900 mb-4">🛠️ Tech Stack</h3>
-                        <ul class="space-y-2 text-gray-600">
-                            <li>• Swift / SwiftUI (iOS)</li>
-                            <li>• React Native / Expo</li>
-                            <li>• Next.js / TypeScript</li>
-                            <li>• Firebase / PostgreSQL</li>
-                            <li>• AI/ML (OpenAI, DigitalOcean Gradient)</li>
-                        </ul>
-                    </div>
-                    <div class="bg-gray-50 rounded-2xl p-6">
-                        <h3 class="text-xl font-bold text-gray-900 mb-4">🎯 Focus Areas</h3>
-                        <ul class="space-y-2 text-gray-600">
-                            <li>• Productivity & Habits</li>
-                            <li>• Games & Entertainment</li>
-                            <li>• Travel & Planning</li>
-                            <li>• AI-Powered Tools</li>
-                            <li>• Privacy-First Design</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+    <div class="divider">* * *</div>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Say hello</h2>
+            <p>Feedback, questions, or just want to chat?</p>
+            <a href="mailto:hello@brickapps.com" class="email-link">hello@brickapps.com</a>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 px-6 bg-gray-50">
-        <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-4xl font-bold text-gray-900 mb-4">Get in Touch</h2>
-            <p class="text-gray-600 text-lg mb-10">
-                Have feedback, questions, or just want to say hi?
-            </p>
-            <div class="flex flex-wrap justify-center gap-4">
-                <a href="mailto:hello@narsi.dev" class="px-8 py-4 bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-semibold rounded-full hover:opacity-90 transition shadow-lg shadow-indigo-200">
-                    📧 Email Me
-                </a>
-                <a href="https://github.com/bnarasimha21" target="_blank" class="px-8 py-4 bg-gray-900 text-white font-semibold rounded-full hover:bg-gray-800 transition">
-                    GitHub
-                </a>
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="/privacy.html">Privacy</a>
+                <a href="/terms">Terms</a>
             </div>
-            <p class="text-gray-500 text-sm mt-8">
-                For app support, please use the in-app feedback option or email directly.
-            </p>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="py-8 px-6 bg-white border-t border-gray-100">
-        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-            <div class="text-gray-600">
-                © 2025 Narsi. All rights reserved.
-            </div>
-            <div class="flex gap-6 text-gray-500">
-                <a href="/privacy" class="hover:text-gray-900 transition">Privacy Policy</a>
-                <a href="/terms" class="hover:text-gray-900 transition">Terms of Service</a>
-            </div>
+            <div>&copy; 2026 BrickApps</div>
         </div>
     </footer>
 
-    <script>
-        // Smooth scroll for navigation
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-    </script>
 </body>
 </html>
