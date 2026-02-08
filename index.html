@@ -106,7 +106,7 @@
 
         /* --- Apps Section --- */
         .apps-section {
-            padding: 56px 0;
+            padding: 24px 0 56px;
         }
         .apps-section h2 {
             font-family: 'DM Serif Display', serif;
@@ -115,68 +115,45 @@
             margin-bottom: 40px;
         }
 
-        .apps-list {
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .app-card {
+            position: relative;
+            border-radius: 20px;
+            padding: 40px 32px;
+            min-height: 280px;
             display: flex;
             flex-direction: column;
-        }
-        .app-row {
-            margin-top: 12px;
-        }
-        .app-row:first-child {
-            margin-top: 0;
-        }
-
-        /* --- App Row (collapsed horizontal bar) --- */
-        .app-row {
-            background: var(--card-bg);
-            border: 1px solid var(--divider);
-            border-radius: 14px;
-            padding: 16px 20px;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            cursor: pointer;
-            transition: background 0.2s, border-color 0.2s;
-            user-select: none;
-        }
-        .app-row:hover {
-            background: #1f1f1f;
-            border-color: #333;
-        }
-        .app-row.active {
-            border-color: var(--brick);
-            border-bottom-left-radius: 0;
-            border-bottom-right-radius: 0;
-            border-bottom-color: var(--divider);
-        }
-
-        .app-icon {
-            width: 56px;
-            height: 56px;
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            flex-shrink: 0;
-        }
-
-        .app-row-info {
-            flex: 1;
-            min-width: 0;
-        }
-        .app-row-info h3 {
-            font-family: 'DM Serif Display', serif;
-            font-size: 1.2rem;
-            line-height: 1.3;
-        }
-        .app-row-subtitle {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-top: 2px;
-            white-space: nowrap;
+            justify-content: flex-end;
             overflow: hidden;
-            text-overflow: ellipsis;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .app-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+        }
+
+        .app-card-emoji {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .app-card h3 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 2rem;
+            line-height: 1.2;
+            margin-bottom: 8px;
+        }
+
+        .app-card-subtitle {
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.75);
+            margin-bottom: 20px;
+            line-height: 1.5;
         }
 
         .badge {
@@ -187,14 +164,16 @@
             letter-spacing: 0.5px;
             padding: 2px 7px;
             border-radius: 4px;
-            background: #332618;
-            color: #f0a050;
+            background: rgba(255,255,255,0.15);
+            color: #ffd68a;
             vertical-align: middle;
             margin-left: 8px;
         }
 
-        .app-row-action {
-            flex-shrink: 0;
+        .app-card-footer {
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
         /* CTA buttons */
@@ -203,17 +182,19 @@
             align-items: center;
             justify-content: center;
             gap: 6px;
-            padding: 8px 20px;
+            padding: 10px 22px;
             border-radius: 50px;
-            font-size: 0.82rem;
+            font-size: 0.85rem;
             font-weight: 600;
             color: #fff;
-            background: var(--brick);
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255,255,255,0.2);
             transition: background 0.2s, transform 0.2s;
             text-decoration: none;
         }
         .cta-btn:hover {
-            background: var(--brick-light);
+            background: rgba(255,255,255,0.25);
             transform: translateY(-1px);
         }
         .cta-btn svg {
@@ -226,97 +207,129 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 8px 18px;
+            padding: 10px 22px;
             border-radius: 50px;
-            font-size: 0.82rem;
+            font-size: 0.85rem;
             font-weight: 600;
-            color: #f0a050;
-            background: #332618;
+            color: rgba(255,255,255,0.5);
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.1);
             cursor: default;
         }
 
-        .app-row-chevron {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            transition: transform 0.3s;
-            flex-shrink: 0;
-            margin-left: 4px;
-        }
-        .app-row.active .app-row-chevron {
-            transform: rotate(180deg);
+        .app-card-meta {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.5);
         }
 
-        /* --- Detail Panel (expanded below row) --- */
-        .app-detail {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease, opacity 0.3s ease;
-            opacity: 0;
-            background: var(--card-bg);
-            border: 1px solid var(--brick);
-            border-top: none;
-            border-bottom-left-radius: 14px;
-            border-bottom-right-radius: 14px;
-        }
-        .app-detail.open {
-            opacity: 1;
-        }
+        .app-card { cursor: pointer; }
 
-        .app-detail-inner {
-            padding: 24px 24px 28px;
-        }
-
-        .app-screenshots {
+        /* --- Modal --- */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(6px);
+            z-index: 100;
             display: flex;
-            gap: 14px;
+            align-items: center;
             justify-content: center;
-            margin-bottom: 24px;
-            overflow-x: auto;
-            padding-bottom: 4px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
         }
-        .app-screenshots img {
-            height: 320px;
+        .modal-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal {
+            background: var(--card-bg);
+            border: 1px solid var(--divider);
+            border-radius: 24px;
+            max-width: 860px;
+            width: 94%;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: translateY(20px) scale(0.97);
+            transition: transform 0.3s;
+        }
+        .modal-overlay.open .modal {
+            transform: translateY(0) scale(1);
+        }
+
+        .modal-header {
+            padding: 40px 40px 0;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+        }
+        .modal-header-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .modal-emoji {
+            font-size: 64px;
+        }
+        .modal-header h3 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 2.4rem;
+            line-height: 1.2;
+        }
+        .modal-meta {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            margin-top: 6px;
+        }
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 4px 10px;
+            border-radius: 10px;
+            transition: background 0.2s;
+            line-height: 1;
+        }
+        .modal-close:hover {
+            background: rgba(255,255,255,0.08);
+            color: var(--text);
+        }
+
+        .modal-screenshots {
+            display: flex;
+            gap: 20px;
+            padding: 32px 40px;
+            overflow-x: auto;
+        }
+        .modal-screenshots img {
+            height: 440px;
             width: auto;
-            border-radius: 16px;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+            border-radius: 18px;
+            box-shadow: 0 6px 32px rgba(0,0,0,0.5);
             border: 1px solid rgba(255,255,255,0.06);
             flex-shrink: 0;
         }
 
-        .app-no-screenshot {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #1e1e1e;
-            border-radius: 14px;
-            border: 1px dashed var(--divider);
-            padding: 32px 16px;
-            margin-bottom: 24px;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            text-align: center;
+        .modal-body {
+            padding: 0 40px 40px;
         }
-
-        .app-detail-desc {
-            font-size: 0.95rem;
+        .modal-desc {
+            font-size: 1.15rem;
             color: var(--text-muted);
-            line-height: 1.7;
-            margin-bottom: 20px;
-            max-width: 600px;
+            line-height: 1.8;
+            margin-bottom: 28px;
         }
-
-        .app-detail-meta {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-bottom: 20px;
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
+        .modal-action .cta-btn {
+            background: var(--brick);
+            border: none;
+            padding: 12px 28px;
+            font-size: 1rem;
         }
-        .app-detail-meta span {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
+        .modal-action .cta-btn:hover {
+            background: var(--brick-light);
         }
 
         /* --- Values --- */
@@ -329,22 +342,6 @@
             font-size: clamp(1.25rem, 3vw, 1.6rem);
             line-height: 1.6;
             color: var(--text);
-            max-width: 520px;
-            margin: 0 auto;
-        }
-
-        /* --- About --- */
-        .about { padding: 48px 0; background: #161616; }
-        .about h2 {
-            font-family: 'DM Serif Display', serif;
-            font-size: 1.75rem;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        .about p {
-            color: var(--text-muted);
-            text-align: center;
-            font-size: 1.05rem;
             max-width: 520px;
             margin: 0 auto;
         }
@@ -399,13 +396,17 @@
             .nav-links { gap: 16px; }
             .hero { padding: 32px 0 16px; }
             .apps-section { padding: 40px 0; }
-            .app-row { padding: 14px 16px; gap: 12px; }
-            .app-icon { width: 48px; height: 48px; font-size: 20px; border-radius: 12px; }
-            .app-row-info h3 { font-size: 1.05rem; }
-            .app-row-subtitle { font-size: 0.8rem; }
-            .app-detail-inner { padding: 20px 16px 24px; }
-            .app-screenshots img { height: 240px; }
-            .app-screenshots { gap: 10px; }
+            .apps-grid { grid-template-columns: 1fr; gap: 16px; }
+            .app-card { padding: 32px 24px; min-height: 240px; }
+            .app-card h3 { font-size: 1.6rem; }
+            .modal-screenshots img { height: 300px; }
+            .modal-header { padding: 28px 24px 0; }
+            .modal-body { padding: 0 24px 28px; }
+            .modal-screenshots { padding: 24px; gap: 14px; }
+            .modal-emoji { font-size: 48px; }
+            .modal-header h3 { font-size: 1.6rem; }
+            .modal-meta { font-size: 0.9rem; }
+            .modal-desc { font-size: 1rem; }
         }
     </style>
 </head>
@@ -434,113 +435,65 @@
 
     <section id="apps" class="apps-section">
         <div class="container">
-            <h2>What we make</h2>
+            <h2>What We Build</h2>
 
-            <div class="apps-list">
+            <div class="apps-grid">
 
                 <!-- FlipIt -->
-                <div class="app-row" onclick="toggleDetail(this)">
-                    <div class="app-icon" style="background: #2d2040;">&#x1F3B4;</div>
-                    <div class="app-row-info">
-                        <h3>FlipIt</h3>
-                        <div class="app-row-subtitle">Card matching game &middot; $3.99</div>
-                    </div>
-                    <div class="app-row-action">
+                <div class="app-card" style="background: linear-gradient(135deg, #4a1942, #2d1b69, #1a1040);"
+                     data-name="FlipIt"
+                     data-emoji="&#x1F3B4;"
+                     data-meta="Free. In-App Purchases &middot; iOS"
+                     data-desc="A memory card matching game with 5 themes, 3 difficulty levels, and global leaderboards. Free to play, unlock all themes with FlipIt Pro."
+                     data-img1="images/flipit/home.png"
+                     data-img2="images/flipit/gameplay.png"
+                     data-link="https://apps.apple.com/in/app/flipit-card-matching-game/id6757392879"
+                     data-link-text="App Store">
+                    <div class="app-card-emoji">&#x1F3B4;</div>
+                    <h3>FlipIt</h3>
+                    <p class="app-card-subtitle">A memory card matching game with 5 themes, 3 difficulty levels, and global leaderboards.</p>
+                    <div class="app-card-footer">
                         <a href="https://apps.apple.com/in/app/flipit-card-matching-game/id6757392879" target="_blank" class="cta-btn" onclick="event.stopPropagation()">
                             <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
                             App Store
                         </a>
-                    </div>
-                    <span class="app-row-chevron">&#x25BE;</span>
-                </div>
-                <div class="app-detail">
-                    <div class="app-detail-inner">
-                        <div class="app-screenshots">
-                            <img src="images/flipit/home.png" alt="FlipIt home screen" loading="lazy">
-                            <img src="images/flipit/gameplay.png" alt="FlipIt gameplay" loading="lazy">
-                        </div>
-                        <p class="app-detail-desc">A memory card matching game with 5 themes, 3 difficulty levels, and global leaderboards. Free to play, unlock all themes with FlipIt Pro.</p>
-                        <div class="app-detail-meta">
-                            <span>&#x1F4B0; $3.99 &middot; one-time purchase</span>
-                            <span>&#x1F34E; iOS</span>
-                        </div>
+                        <span class="app-card-meta">Free &middot; iOS</span>
                     </div>
                 </div>
 
                 <!-- DailyBrick -->
-                <div class="app-row" onclick="toggleDetail(this)">
-                    <div class="app-icon" style="background: #1a2e1a;">&#x2713;</div>
-                    <div class="app-row-info">
-                        <h3>DailyBrick <span class="badge">Coming Soon</span></h3>
-                        <div class="app-row-subtitle">Habit tracker &middot; $9.99 lifetime</div>
-                    </div>
-                    <div class="app-row-action">
+                <div class="app-card" style="background: linear-gradient(135deg, #1a3a2a, #0d2818, #1a2e1a);"
+                     data-name="DailyBrick"
+                     data-emoji="&#x2713;"
+                     data-meta="Free. In-App Purchases &middot; iOS"
+                     data-desc="An offline-first habit tracker. Track daily and weekly habits, build streaks, see your progress. Your data never leaves your device."
+                     data-img1="images/dailybrick/habits.png"
+                     data-img2="images/dailybrick/stats.png">
+                    <div class="app-card-emoji">&#x2713;</div>
+                    <h3>DailyBrick <span class="badge">Coming Soon</span></h3>
+                    <p class="app-card-subtitle">An offline-first habit tracker. Build streaks, track progress. Your data never leaves your device.</p>
+                    <div class="app-card-footer">
                         <span class="cta-coming-soon">Coming Soon</span>
-                    </div>
-                    <span class="app-row-chevron">&#x25BE;</span>
-                </div>
-                <div class="app-detail">
-                    <div class="app-detail-inner">
-                        <div class="app-screenshots">
-                            <img src="images/dailybrick/habits.png" alt="DailyBrick habits" loading="lazy">
-                            <img src="images/dailybrick/stats.png" alt="DailyBrick stats" loading="lazy">
-                        </div>
-                        <p class="app-detail-desc">An offline-first habit tracker. Track daily and weekly habits, build streaks, see your progress. Your data never leaves your device.</p>
-                        <div class="app-detail-meta">
-                            <span>&#x1F4B0; $9.99 &middot; lifetime</span>
-                            <span>&#x1F4F1; Android / iOS</span>
-                        </div>
+                        <span class="app-card-meta">Free &middot; iOS</span>
                     </div>
                 </div>
 
                 <!-- Silly Debates -->
-                <div class="app-row" onclick="toggleDetail(this)">
-                    <div class="app-icon" style="background: #2a1a3d;">&#x1F928;</div>
-                    <div class="app-row-info">
-                        <h3>Silly Debates <span class="badge">Coming Soon</span></h3>
-                        <div class="app-row-subtitle">AI-powered debates &middot; Free</div>
-                    </div>
-                    <div class="app-row-action">
+                <div class="app-card" style="background: linear-gradient(135deg, #3d1a5c, #2a1a3d, #1a1033);"
+                     data-name="Silly Debates"
+                     data-emoji="&#x1F928;"
+                     data-meta="Free. In-App Purchases &middot; iOS"
+                     data-desc="AI-powered debates on absurd topics. Pick a side, argue your case, and let AI judge who wins. Fun, fast, and endlessly silly."
+                     data-img1="images/sillydebates/home.png"
+                     data-img2="images/sillydebates/gameplay.png">
+                    <div class="app-card-emoji">&#x1F928;</div>
+                    <h3>Silly Debates <span class="badge">Coming Soon</span></h3>
+                    <p class="app-card-subtitle">AI-powered debates on absurd topics. Pick a side, argue your case, and let AI judge who wins.</p>
+                    <div class="app-card-footer">
                         <span class="cta-coming-soon">Coming Soon</span>
-                    </div>
-                    <span class="app-row-chevron">&#x25BE;</span>
-                </div>
-                <div class="app-detail">
-                    <div class="app-detail-inner">
-                        <div class="app-screenshots">
-                            <img src="images/sillydebates/home.png" alt="Silly Debates home screen" loading="lazy">
-                            <img src="images/sillydebates/gameplay.png" alt="Silly Debates gameplay" loading="lazy">
-                        </div>
-                        <p class="app-detail-desc">AI-powered debates on absurd topics. Pick a side, argue your case, and let AI judge who wins. Fun, fast, and endlessly silly.</p>
-                        <div class="app-detail-meta">
-                            <span>&#x1F4B0; Free</span>
-                            <span>&#x1F34E; iOS</span>
-                        </div>
+                        <span class="app-card-meta">Free &middot; iOS</span>
                     </div>
                 </div>
-
-                <!-- TripXplorer (hidden)
-                <div class="app-row" onclick="toggleDetail(this)">
-                    <div class="app-icon" style="background: #1a2433;">&#x2708;&#xFE0F;</div>
-                    <div class="app-row-info">
-                        <h3>TripXplorer <span class="badge">Coming Soon</span></h3>
-                        <div class="app-row-subtitle">AI travel planner &middot; Free</div>
-                    </div>
-                    <div class="app-row-action">
-                        <span class="cta-coming-soon">Coming Soon</span>
-                    </div>
-                    <span class="app-row-chevron">&#x25BE;</span>
-                </div>
-                <div class="app-detail">
-                    <div class="app-detail-inner">
-                        <div class="app-no-screenshot">Screenshots coming soon</div>
-                        <p class="app-detail-desc">AI-powered travel planner with interactive maps and a chatbot assistant. Generate personalized itineraries, visualize them on Mapbox, and refine plans through conversation.</p>
-                        <div class="app-detail-meta">
-                            <span>&#x1F4B0; Free &middot; open source</span>
-                        </div>
-                    </div>
-                </div>
-                -->
 
             </div>
         </div>
@@ -573,27 +526,78 @@
         </div>
     </footer>
 
+    <!-- App Detail Modal -->
+    <div class="modal-overlay" id="appModal">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-header-info">
+                    <span class="modal-emoji" id="modalEmoji"></span>
+                    <div>
+                        <h3 id="modalName"></h3>
+                        <div class="modal-meta" id="modalMeta"></div>
+                    </div>
+                </div>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-screenshots" id="modalScreenshots"></div>
+            <div class="modal-body">
+                <p class="modal-desc" id="modalDesc"></p>
+                <div class="modal-action" id="modalAction"></div>
+            </div>
+        </div>
+    </div>
+
     <script>
-        function toggleDetail(row) {
-            var detail = row.nextElementSibling;
-            var isOpen = row.classList.contains('active');
+        var overlay = document.getElementById('appModal');
 
-            // Close all open panels
-            document.querySelectorAll('.app-row.active').forEach(function(r) {
-                r.classList.remove('active');
-                var d = r.nextElementSibling;
-                d.style.maxHeight = null;
-                d.classList.remove('open');
+        document.querySelectorAll('.app-card').forEach(function(card) {
+            card.addEventListener('click', function() {
+                document.getElementById('modalEmoji').textContent = card.dataset.emoji;
+                document.getElementById('modalName').textContent = card.dataset.name;
+                document.getElementById('modalMeta').textContent = card.dataset.meta;
+                document.getElementById('modalDesc').textContent = card.dataset.desc;
+
+                var screenshots = document.getElementById('modalScreenshots');
+                screenshots.innerHTML = '';
+                if (card.dataset.img1) {
+                    var img1 = document.createElement('img');
+                    img1.src = card.dataset.img1;
+                    img1.alt = card.dataset.name + ' screenshot 1';
+                    img1.loading = 'lazy';
+                    screenshots.appendChild(img1);
+                }
+                if (card.dataset.img2) {
+                    var img2 = document.createElement('img');
+                    img2.src = card.dataset.img2;
+                    img2.alt = card.dataset.name + ' screenshot 2';
+                    img2.loading = 'lazy';
+                    screenshots.appendChild(img2);
+                }
+
+                var action = document.getElementById('modalAction');
+                if (card.dataset.link) {
+                    action.innerHTML = '<a href="' + card.dataset.link + '" target="_blank" class="cta-btn">' + card.dataset.linkText + '</a>';
+                } else {
+                    action.innerHTML = '<span class="cta-coming-soon">Coming Soon</span>';
+                }
+
+                overlay.classList.add('open');
+                document.body.style.overflow = 'hidden';
             });
+        });
 
-            // If we clicked an already-open row, just close it
-            if (isOpen) return;
-
-            // Open the clicked panel
-            row.classList.add('active');
-            detail.classList.add('open');
-            detail.style.maxHeight = detail.scrollHeight + 'px';
+        function closeModal() {
+            overlay.classList.remove('open');
+            document.body.style.overflow = '';
         }
+
+        overlay.addEventListener('click', function(e) {
+            if (e.target === overlay) closeModal();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
+        });
     </script>
 
 </body>
