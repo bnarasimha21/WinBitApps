@@ -20,9 +20,12 @@ Website for [WinBitApps](https://winbitapps.com) — a small indie studio buildi
 
 ```
 WinBitApps/
-├── index.html      # Main portfolio page
-├── privacy.html    # Privacy policy
-├── vercel.json     # Vercel deployment config
+├── images/
+│   ├── flipit/         # FlipIt app screenshots
+│   └── dailybrick/     # DailyBrick app screenshots
+├── index.html          # Main portfolio page
+├── privacy.html        # Privacy policy
+├── vercel.json         # Vercel deployment config
 └── README.md
 ```
 
