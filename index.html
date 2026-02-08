@@ -104,7 +104,7 @@
             50% { transform: translateY(6px); }
         }
 
-        /* --- Apps Section --- */
+        /* --- Apps Grid Section --- */
         .apps-section {
             padding: 56px 0;
         }
@@ -115,73 +115,57 @@
             margin-bottom: 40px;
         }
 
-        .apps-list {
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 28px;
+        }
+
+        /* --- App Card --- */
+        .app-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            border: 1px solid var(--divider);
+            padding: 28px 24px;
             display: flex;
             flex-direction: column;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
-        .app-row {
-            margin-top: 12px;
-        }
-        .app-row:first-child {
-            margin-top: 0;
+        .app-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.3);
         }
 
-        /* --- App Row (collapsed horizontal bar) --- */
-        .app-row {
-            background: var(--card-bg);
-            border: 1px solid var(--divider);
-            border-radius: 14px;
-            padding: 16px 20px;
+        .app-card-header {
             display: flex;
             align-items: center;
-            gap: 16px;
-            cursor: pointer;
-            transition: background 0.2s, border-color 0.2s;
-            user-select: none;
+            gap: 12px;
+            margin-bottom: 6px;
         }
-        .app-row:hover {
-            background: #1f1f1f;
-            border-color: #333;
-        }
-        .app-row.active {
-            border-color: var(--brick);
-            border-bottom-left-radius: 0;
-            border-bottom-right-radius: 0;
-            border-bottom-color: var(--divider);
-        }
-
         .app-icon {
-            width: 56px;
-            height: 56px;
-            border-radius: 14px;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
+            font-size: 22px;
             flex-shrink: 0;
         }
-
-        .app-row-info {
-            flex: 1;
-            min-width: 0;
-        }
-        .app-row-info h3 {
+        .app-card-header h3 {
             font-family: 'DM Serif Display', serif;
-            font-size: 1.2rem;
-            line-height: 1.3;
+            font-size: 1.4rem;
         }
-        .app-row-subtitle {
+
+        .app-meta {
             font-size: 0.85rem;
             color: var(--text-muted);
-            margin-top: 2px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            margin-bottom: 12px;
         }
 
         .badge {
             display: inline-block;
-            font-size: 0.6rem;
+            font-size: 0.65rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -193,96 +177,29 @@
             margin-left: 8px;
         }
 
-        .app-row-action {
-            flex-shrink: 0;
-        }
-
-        /* CTA buttons */
-        .cta-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            padding: 8px 20px;
-            border-radius: 50px;
-            font-size: 0.82rem;
-            font-weight: 600;
-            color: #fff;
-            background: var(--brick);
-            transition: background 0.2s, transform 0.2s;
-            text-decoration: none;
-        }
-        .cta-btn:hover {
-            background: var(--brick-light);
-            transform: translateY(-1px);
-        }
-        .cta-btn svg {
-            width: 14px;
-            height: 14px;
-            fill: currentColor;
-        }
-
-        .cta-coming-soon {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 8px 18px;
-            border-radius: 50px;
-            font-size: 0.82rem;
-            font-weight: 600;
-            color: #f0a050;
-            background: #332618;
-            cursor: default;
-        }
-
-        .app-row-chevron {
+        .app-desc {
+            font-size: 0.95rem;
             color: var(--text-muted);
-            font-size: 1.1rem;
-            transition: transform 0.3s;
-            flex-shrink: 0;
-            margin-left: 4px;
-        }
-        .app-row.active .app-row-chevron {
-            transform: rotate(180deg);
+            line-height: 1.6;
+            margin-bottom: 20px;
+            flex: 1;
         }
 
-        /* --- Detail Panel (expanded below row) --- */
-        .app-detail {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease, opacity 0.3s ease;
-            opacity: 0;
-            background: var(--card-bg);
-            border: 1px solid var(--brick);
-            border-top: none;
-            border-bottom-left-radius: 14px;
-            border-bottom-right-radius: 14px;
-        }
-        .app-detail.open {
-            opacity: 1;
-        }
-
-        .app-detail-inner {
-            padding: 24px 24px 28px;
-        }
-
+        /* Screenshots inside card */
         .app-screenshots {
             display: flex;
-            gap: 14px;
+            gap: 10px;
             justify-content: center;
-            margin-bottom: 24px;
-            overflow-x: auto;
-            padding-bottom: 4px;
+            margin-bottom: 20px;
         }
         .app-screenshots img {
-            height: 320px;
-            width: auto;
-            border-radius: 16px;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+            width: calc(50% - 5px);
+            border-radius: 14px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.35);
             border: 1px solid rgba(255,255,255,0.06);
-            flex-shrink: 0;
         }
 
+        /* No-screenshot placeholder */
         .app-no-screenshot {
             display: flex;
             align-items: center;
@@ -291,32 +208,50 @@
             border-radius: 14px;
             border: 1px dashed var(--divider);
             padding: 32px 16px;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
             color: var(--text-muted);
             font-size: 0.85rem;
             text-align: center;
         }
 
-        .app-detail-desc {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            line-height: 1.7;
-            margin-bottom: 20px;
-            max-width: 600px;
-        }
-
-        .app-detail-meta {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-bottom: 20px;
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-        .app-detail-meta span {
+        /* CTA buttons */
+        .cta-btn {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 22px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #fff;
+            background: var(--brick);
+            transition: background 0.2s, transform 0.2s;
+            align-self: flex-start;
+        }
+        .cta-btn:hover {
+            background: var(--brick-light);
+            transform: translateY(-1px);
+        }
+        .cta-btn svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+
+        .cta-coming-soon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 22px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #f0a050;
+            background: #332618;
+            cursor: default;
+            align-self: flex-start;
         }
 
         /* --- Values --- */
@@ -396,16 +331,13 @@
 
         /* --- Responsive --- */
         @media (max-width: 580px) {
+            .apps-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
             .nav-links { gap: 16px; }
             .hero { padding: 32px 0 16px; }
             .apps-section { padding: 40px 0; }
-            .app-row { padding: 14px 16px; gap: 12px; }
-            .app-icon { width: 48px; height: 48px; font-size: 20px; border-radius: 12px; }
-            .app-row-info h3 { font-size: 1.05rem; }
-            .app-row-subtitle { font-size: 0.8rem; }
-            .app-detail-inner { padding: 20px 16px 24px; }
-            .app-screenshots img { height: 240px; }
-            .app-screenshots { gap: 10px; }
         }
     </style>
 </head>
@@ -436,109 +368,66 @@
         <div class="container">
             <h2>What we make</h2>
 
-            <div class="apps-list">
+            <div class="apps-grid">
 
                 <!-- FlipIt -->
-                <div class="app-row" onclick="toggleDetail(this)">
-                    <div class="app-icon" style="background: #2d2040;">&#x1F3B4;</div>
-                    <div class="app-row-info">
+                <div class="app-card">
+                    <div class="app-card-header">
+                        <div class="app-icon" style="background: #2d2040;">&#x1F3B4;</div>
                         <h3>FlipIt</h3>
-                        <div class="app-row-subtitle">Card matching game &middot; $3.99</div>
                     </div>
-                    <div class="app-row-action">
-                        <a href="https://apps.apple.com/in/app/flipit-card-matching-game/id6757392879" target="_blank" class="cta-btn" onclick="event.stopPropagation()">
-                            <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-                            App Store
-                        </a>
+                    <div class="app-meta">$3.99 &middot; one-time purchase</div>
+                    <div class="app-screenshots">
+                        <img src="images/flipit/home.png" alt="FlipIt home screen" loading="lazy">
+                        <img src="images/flipit/gameplay.png" alt="FlipIt gameplay" loading="lazy">
                     </div>
-                    <span class="app-row-chevron">&#x25BE;</span>
-                </div>
-                <div class="app-detail">
-                    <div class="app-detail-inner">
-                        <div class="app-screenshots">
-                            <img src="images/flipit/home.png" alt="FlipIt home screen" loading="lazy">
-                            <img src="images/flipit/gameplay.png" alt="FlipIt gameplay" loading="lazy">
-                        </div>
-                        <p class="app-detail-desc">A memory card matching game with 5 themes, 3 difficulty levels, and global leaderboards. Free to play, unlock all themes with FlipIt Pro.</p>
-                        <div class="app-detail-meta">
-                            <span>&#x1F4B0; $3.99 &middot; one-time purchase</span>
-                            <span>&#x1F34E; iOS</span>
-                        </div>
-                    </div>
+                    <p class="app-desc">A memory card matching game with 5 themes, 3 difficulty levels, and global leaderboards. Free to play, unlock all themes with FlipIt Pro.</p>
+                    <a href="https://apps.apple.com/in/app/flipit-card-matching-game/id6757392879" target="_blank" class="cta-btn">
+                        <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                        App Store
+                    </a>
                 </div>
 
                 <!-- DailyBrick -->
-                <div class="app-row" onclick="toggleDetail(this)">
-                    <div class="app-icon" style="background: #1a2e1a;">&#x2713;</div>
-                    <div class="app-row-info">
+                <div class="app-card">
+                    <div class="app-card-header">
+                        <div class="app-icon" style="background: #1a2e1a;">&#x2713;</div>
                         <h3>DailyBrick <span class="badge">Coming Soon</span></h3>
-                        <div class="app-row-subtitle">Habit tracker &middot; $9.99 lifetime</div>
                     </div>
-                    <div class="app-row-action">
-                        <span class="cta-coming-soon">Coming Soon</span>
+                    <div class="app-meta">$9.99 &middot; lifetime</div>
+                    <div class="app-screenshots">
+                        <img src="images/dailybrick/habits.png" alt="DailyBrick habits" loading="lazy">
+                        <img src="images/dailybrick/stats.png" alt="DailyBrick stats" loading="lazy">
                     </div>
-                    <span class="app-row-chevron">&#x25BE;</span>
-                </div>
-                <div class="app-detail">
-                    <div class="app-detail-inner">
-                        <div class="app-screenshots">
-                            <img src="images/dailybrick/habits.png" alt="DailyBrick habits" loading="lazy">
-                            <img src="images/dailybrick/stats.png" alt="DailyBrick stats" loading="lazy">
-                        </div>
-                        <p class="app-detail-desc">An offline-first habit tracker. Track daily and weekly habits, build streaks, see your progress. Your data never leaves your device.</p>
-                        <div class="app-detail-meta">
-                            <span>&#x1F4B0; $9.99 &middot; lifetime</span>
-                            <span>&#x1F4F1; Android / iOS</span>
-                        </div>
-                    </div>
+                    <p class="app-desc">An offline-first habit tracker. Track daily and weekly habits, build streaks, see your progress. Your data never leaves your device.</p>
+                    <span class="cta-coming-soon">Coming Soon</span>
                 </div>
 
                 <!-- Silly Debates -->
-                <div class="app-row" onclick="toggleDetail(this)">
-                    <div class="app-icon" style="background: #2a1a3d;">&#x1F928;</div>
-                    <div class="app-row-info">
+                <div class="app-card">
+                    <div class="app-card-header">
+                        <div class="app-icon" style="background: #2a1a3d;">&#x1F928;</div>
                         <h3>Silly Debates <span class="badge">Coming Soon</span></h3>
-                        <div class="app-row-subtitle">AI-powered debates &middot; Free</div>
                     </div>
-                    <div class="app-row-action">
-                        <span class="cta-coming-soon">Coming Soon</span>
+                    <div class="app-meta">Free &middot; iOS</div>
+                    <div class="app-screenshots">
+                        <img src="images/sillydebates/home.png" alt="Silly Debates home screen" loading="lazy">
+                        <img src="images/sillydebates/gameplay.png" alt="Silly Debates gameplay" loading="lazy">
                     </div>
-                    <span class="app-row-chevron">&#x25BE;</span>
-                </div>
-                <div class="app-detail">
-                    <div class="app-detail-inner">
-                        <div class="app-screenshots">
-                            <img src="images/sillydebates/home.png" alt="Silly Debates home screen" loading="lazy">
-                            <img src="images/sillydebates/gameplay.png" alt="Silly Debates gameplay" loading="lazy">
-                        </div>
-                        <p class="app-detail-desc">AI-powered debates on absurd topics. Pick a side, argue your case, and let AI judge who wins. Fun, fast, and endlessly silly.</p>
-                        <div class="app-detail-meta">
-                            <span>&#x1F4B0; Free</span>
-                            <span>&#x1F34E; iOS</span>
-                        </div>
-                    </div>
+                    <p class="app-desc">AI-powered debates on absurd topics. Pick a side, argue your case, and let AI judge who wins. Fun, fast, and endlessly silly.</p>
+                    <span class="cta-coming-soon">Coming Soon</span>
                 </div>
 
-                <!-- TripXplorer (hidden)
-                <div class="app-row" onclick="toggleDetail(this)">
-                    <div class="app-icon" style="background: #1a2433;">&#x2708;&#xFE0F;</div>
-                    <div class="app-row-info">
+                <!-- TripXplorer
+                <div class="app-card">
+                    <div class="app-card-header">
+                        <div class="app-icon" style="background: #1a2433;">&#x2708;&#xFE0F;</div>
                         <h3>TripXplorer <span class="badge">Coming Soon</span></h3>
-                        <div class="app-row-subtitle">AI travel planner &middot; Free</div>
                     </div>
-                    <div class="app-row-action">
-                        <span class="cta-coming-soon">Coming Soon</span>
-                    </div>
-                    <span class="app-row-chevron">&#x25BE;</span>
-                </div>
-                <div class="app-detail">
-                    <div class="app-detail-inner">
-                        <div class="app-no-screenshot">Screenshots coming soon</div>
-                        <p class="app-detail-desc">AI-powered travel planner with interactive maps and a chatbot assistant. Generate personalized itineraries, visualize them on Mapbox, and refine plans through conversation.</p>
-                        <div class="app-detail-meta">
-                            <span>&#x1F4B0; Free &middot; open source</span>
-                        </div>
-                    </div>
+                    <div class="app-meta">Free &middot; open source</div>
+                    <div class="app-no-screenshot">Screenshots coming soon</div>
+                    <p class="app-desc">AI-powered travel planner with interactive maps and a chatbot assistant. Generate personalized itineraries, visualize them on Mapbox, and refine plans through conversation.</p>
+                    <span class="cta-coming-soon">Coming Soon</span>
                 </div>
                 -->
 
@@ -572,29 +461,6 @@
             <div>&copy; 2026 WinBitApps</div>
         </div>
     </footer>
-
-    <script>
-        function toggleDetail(row) {
-            var detail = row.nextElementSibling;
-            var isOpen = row.classList.contains('active');
-
-            // Close all open panels
-            document.querySelectorAll('.app-row.active').forEach(function(r) {
-                r.classList.remove('active');
-                var d = r.nextElementSibling;
-                d.style.maxHeight = null;
-                d.classList.remove('open');
-            });
-
-            // If we clicked an already-open row, just close it
-            if (isOpen) return;
-
-            // Open the clicked panel
-            row.classList.add('active');
-            detail.classList.add('open');
-            detail.style.maxHeight = detail.scrollHeight + 'px';
-        }
-    </script>
 
 </body>
 </html>
